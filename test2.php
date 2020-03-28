@@ -106,7 +106,7 @@ if ($result->num_rows >= 0) {
         if( !url_test( $row["url"] ) ) {
           //SI el sitio esta caido
           echo  "<li style='font-size: 15px'>"."id:" .$row["id"]. "<li style='font-size: 15px'>Name of Site: " . $row["nombre"]. "<li style='font-size: 15px'>Url of Site:" . $row["url"]."</li><ul style='font-size: 15px; margin-left:500px; margin-top:-30px'>is Down!";
-          echo '<img style="width: 25px; height: 25px; padding-left: 78px" src="'.$nope.'"/></ul><hr/>';
+          echo '<img style="width: 25px; height: 25px; padding-left: 78px" src="'.$nope.'"/></ul>';
 	echo '<button id="btn_borrar" name="btn_borrar" onclick="borrar('.$row["id"].');" type="submit" class="cancel">Delete</button><hr/>';
           //Invoco la funcion y le mando el parametro para dar el nombre del sitio caido
           send_email($row["nombre"]);
@@ -114,7 +114,7 @@ if ($result->num_rows >= 0) {
         else { 
           //Si no esta caido
           echo  "<li style='font-size: 15px'>"."id:" .$row["id"]. "<li style='font-size: 15px'>Name of Site: " . $row["nombre"]. "<li style='font-size: 15px'>Url of Site:" . $row["url"]."</li><ul style='font-size: 15px; margin-left:500px; margin-top:-30px'>is Up!";
-          echo '<img class="check"  src="'.$yes.'"/></ul><hr/>'; 
+          echo '<img class="check"  src="'.$yes.'"/></ul>'; 
 	echo '<button id="btn_borrar" onclick="borrar('.$row["id"].');" name="btn_borrar" type="button" class="cancel">Delete</button><hr/>';
 }
         
