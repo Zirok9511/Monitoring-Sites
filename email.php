@@ -1,17 +1,17 @@
 <?php
 require 'PHPMailerAutoload.php';
 
-$mail = new PHPMailer;
+//$mail = new PHPMailer;
 
-//$mail->SMTPDebug = 2;                               // Enable verbose debug output
+$mail->SMTPDebug = 2;                               // Enable verbose debug output
 
 $mail->isSMTP();                                      // Set mailer to use SMTP
-$mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+$mail->Host = 'email-smtp.us-east-1.amazonaws.com';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'zirokguadron11@gmail.com';                 // SMTP username
-$mail->Password = 'zirokaxa9511';                           // SMTP password
+$mail->Username = 'AKIA4UYIPFNQX63GWG63';                 // SMTP username
+$mail->Password = 'BCKDQoU3nsty5zZPGAjw1muT1TEt6BIFVEE+yS4viSiX';                           // SMTP password
 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 587 ;                                    // TCP port to connect to
+$mail->Port = 587;                                    // TCP port to connect to
 
 $mail->setFrom('dev@orbitweb.ca', 'Sites Monitoring');
 $mail->addAddress('dev@orbitweb.ca', 'Developers');     // Add a recipient

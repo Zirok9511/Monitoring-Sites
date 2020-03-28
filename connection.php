@@ -1,9 +1,9 @@
 <?php
 /** Credenciales de la conexion a la base de datos */
-$servername = '127.0.0.1';
-$username = 'zirok';
-$password = '';
-$dbname = 'urls';
+$servername = 'orbitweb-ca-central-1b.cul183bjpepe.ca-central-1.rds.amazonaws.com';
+$username = 'orbit';
+$password = '$plinter1932';
+$dbname = 'monitoring';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
