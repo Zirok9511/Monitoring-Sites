@@ -35,41 +35,27 @@ include('connection.php');
 
 
 //THis function make the email 
+
 function send_email($site){
-  require 'PHPMailerAutoload.php';
-
-$mail = new PHPMailer;
-
-//$mail->SMTPDebug = 2;                               // Enable verbose debug output
-
-$mail->isSMTP();                                      // Set mailer to use SMTP
-$mail->Host = 'email-smtp.us-east-1.amazonaws.com';  // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                               // Enable SMTP authentication
-$mail->Username = 'AKIA4UYIPFNQX63GWG63';                 // SMTP username
-$mail->Password = 'BCKDQoU3nsty5zZPGAjw1muT1TEt6BIFVEE+yS4viSiX';                           // SMTP password
-$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 587 ;                                    // TCP port to connect to
-
-$mail->setFrom('dev@orbitweb.ca', 'Sites Monitoring');
-$mail->addAddress('dev@orbitweb.ca', 'Developers');     // Add a recipient
-//$mail->addAddress('ellen@example.com');               // Name is optional
-//$mail->addReplyTo('info@example.com', 'Information');
-//$mail->addCC('cc@example.com');
-//$mail->addBCC('bcc@example.com');
-
-//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-$mail->isHTML(true);                                  // Set email format to HTML
-
-$mail->Subject = 'Sites Monitoring';
-$mail->Body    = 'The site with the name: '.$site.'  is Down, please check it<br/> Att: Orbitweb Developers';
-$mail->AltBody = 'Some Site is Down, please check it<br/> Att: Orbitweb Developers';
-
-if(!$mail->send()) {
-    echo 'Message could not be sent.';
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-} else {
-    echo '';
+  function sanitize_my_email($field) {
+    $field = filter_var($field, FILTER_SANITIZE_EMAIL);
+    if (filter_var($field, FILTER_VALIDATE_EMAIL)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+$to_email = 'dev@orbitweb.ca';
+$subject = 'Testing PHP Mail';
+$message = 'This mail is sent using the PHP mail ';
+$headers = 'From: zirokguadron11@gmail.com';
+//check if the email address is invalid $secure_check
+$secure_check = sanitize_my_email($to_email);
+if ($secure_check == false) {
+    echo "Invalid input";
+} else { //send email 
+    mail($to_email, $subject, $message, $headers);
+    echo "This email is sent using PHP Mail";
 }
 }
 
@@ -106,7 +92,7 @@ if ($result->num_rows >= 0) {
         if( !url_test( $row["url"] ) ) {
           //SI el sitio esta caido
           echo  "<li style='font-size: 15px'>"."id:" .$row["id"]. "<li style='font-size: 15px'>Name of Site: " . $row["nombre"]. "<li style='font-size: 15px'>Url of Site:" . $row["url"]."</li><ul style='font-size: 15px; margin-left:500px; margin-top:-30px'>is Down!";
-          echo '<img style="width: 25px; height: 25px; padding-left: 78px" src="'.$nope.'"/></ul><hr/>';
+          echo '<img style="width: 25px; height: 25px; padding-left: 78px" src="'.$nope.'"/></ul>';
 	echo '<button id="btn_borrar" name="btn_borrar" onclick="borrar('.$row["id"].');" type="submit" class="cancel">Delete</button><hr/>';
           //Invoco la funcion y le mando el parametro para dar el nombre del sitio caido
           send_email($row["nombre"]);
@@ -114,7 +100,7 @@ if ($result->num_rows >= 0) {
         else { 
           //Si no esta caido
           echo  "<li style='font-size: 15px'>"."id:" .$row["id"]. "<li style='font-size: 15px'>Name of Site: " . $row["nombre"]. "<li style='font-size: 15px'>Url of Site:" . $row["url"]."</li><ul style='font-size: 15px; margin-left:500px; margin-top:-30px'>is Up!";
-          echo '<img class="check"  src="'.$yes.'"/></ul><hr/>'; 
+          echo '<img class="check"  src="'.$yes.'"/></ul>'; 
 	echo '<button id="btn_borrar" onclick="borrar('.$row["id"].');" name="btn_borrar" type="button" class="cancel">Delete</button><hr/>';
 }
         
@@ -136,8 +122,8 @@ function borrar(id) {
             //alert(data);
         });
 
-        alert('se borro correctamente');
-        window.location="index.html";
+        alert('It was deleted correctly');
+        window.location="#";
 }
 </script>
   </body>
